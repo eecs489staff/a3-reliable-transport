@@ -101,7 +101,7 @@ You may debug your code using spdlog::debug.
 <a name="part2"></a>
 ## Part 2: Implement `wReceiver`
 
-`wReceiver` needs to handle only one `wSender` at a time and should ignore `START` messages while in the middle of an existing connection. It must receive and store the file sent by the sender on disk completely and correctly; i.e., if it received a video file, we should be able to play it! The stored file should be named `FILE-i.out`, where `i=0` for the file from the first connection, `i=1` for the second, and so on. `wReceiver` should not terminate, so it can handle multiple `wSender` communications in sequence.
+`wReceiver` needs to handle only one `wSender` at a time and ignore any new connection requests. It must receive and store the file sent by the sender on disk completely and correctly; i.e., if it received a video file, we should be able to play it! The stored file should be named `FILE-i.out`, where `i=0` for the file from the first connection, `i=1` for the second, and so on. `wReceiver` should not terminate, so it can handle multiple `wSender` communications in sequence.
 
 `wReceiver` should also calculate the checksum value for the data in each `packet` it receives using the header mentioned in part 1. If the calculated checksum value does not match the `checksum` provided in the header, it should drop the packet (i.e. not send an ACK back to the sender).
 
