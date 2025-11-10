@@ -164,7 +164,7 @@ The command line parameters passed to these new `wSenderOpt` and `wReceiverOpt` 
 <a name="tips"></a>
 ## Important Notes
 * It is up to you how you choose to read from and write to files, but you may find the `std::ifstream.read()` and `std::ofstream.write()` functions particularly helpful.
-* Please closely follow updates on Piazza. All further clarifications will be posted on Piazza via pinned Instructor Notes. We recommend you follow these notes to receive updates in time.
+* Please closely follow updates on Ed. All further clarifications will be posted on Ed via pinned Instructor Notes. We recommend you follow these notes to receive updates in time.
 * You MUST NOT use TCP sockets.
 * You can find an example of UDP socket programming in the Discussion folder.
 * Another good resource for UDP socket programming is [Beej's Guide to Network Programming Using Internet Sockets](https://beej.us/guide/bgnet/html/index.html).
@@ -190,7 +190,7 @@ make
     
 <a name="autograder"></a>
 ## Autograder
-The autograder will be released within a week of the assignment being released. Each group will have a total of three submits per day. Furthermore, groups have a total of three late days to use across Assignments 2-4. 
+Each group will have a total of three submits per day. Furthermore, groups have a total of three late days to use across Assignments 2-4. 
 
 The Autograder is not a debugging tool. You can and should design tests to fully test your design.
 
