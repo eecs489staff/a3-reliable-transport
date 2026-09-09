@@ -4,7 +4,7 @@ latex: true
 ---
 # Assignment 3: Reliable Transport
 
-### Due: November 7, 2025 at 11:59 PM
+### Due: November 13, 2026 at 11:59 PM
 
 ## Table of contents
 * [Overview](#overview)
@@ -19,9 +19,9 @@ latex: true
 <a name="overview"></a>
 ## Overview
 
-In this project, you will build a simple reliable transport protocol, WTP, **on top of UDP**. Your WTP implementation must provide inorder, reliable delivery of UDP datagrams in the presence of events like packet loss, delay, corruption, duplication, and reordering.
+In this project, you will build a simple reliable transport protocol, WTP, **on top of UDP**. Your WTP implementation must provide in-order, reliable delivery of UDP datagrams in the presence of events like packet loss, delay, corruption, duplication, and reordering.
 
-There are a variety of ways to ensure a message is reliably delivered from a sender to a receiver. You are to implement a sender (`wSender`) and a receiver (`wReceiver`) that follows the following WTP specification.
+There are a variety of ways to ensure a message is reliably delivered from a sender to a receiver. You are to implement a sender (`wSender`) and a receiver (`wReceiver`) that follow the following WTP specification.
 
 ### WTP Specification
 WTP sends data in the format of a header, followed by a chunk of data.
@@ -37,11 +37,11 @@ struct PacketHeader {
 }
 ```
 
-To initiate a connection, `wSender` starts with a `START` message along with a random `seqNum` value, and waits for an ACK for this `START` message. After sending the `START` message, additional packets in the same connection are sent using the `DATA` message type, adjusting `seqNum` appropriately (see below). After everything has been transferred, the connection should be terminated with `wSender` sending an `END` message with the same `seqNumq` as the `START` message, and waiting for the corresponding ACK for this message.
+To initiate a connection, `wSender` starts with a `START` message along with a random `seqNum` value, and waits for an ACK for this `START` message. After sending the `START` message, additional packets in the same connection are sent using the `DATA` message type, adjusting `seqNum` appropriately (see below). After everything has been transferred, the connection should be terminated with `wSender` sending an `END` message with the same `seqNum` as the `START` message, and waiting for the corresponding ACK for this message.
 
 The ACK `seqNum` values for `START` and `END` messages should be set to the `seqNum` values sent by `wSender`.
 
-`wSender` will use **0** as the initial sequence number for data packets in that connection (this is to make debugging easier; a real protocol would probably use the initial sequence number of the start packet + 1). Furthermore, `wReceiver` sends back cumulative `ACK` packets (described in more details below).
+`wSender` will use **0** as the initial sequence number for data packets in that connection (this is to make debugging easier; a real protocol would probably use the initial sequence number of the start packet + 1). Furthermore, `wReceiver` sends back cumulative `ACK` packets (described in more detail below).
 
 ### Packet Size
 An important limitation is the maximum size of your packets. The UDP protocol has an 8 byte header, and the IP protocol underneath it has a header of 20 bytes. Because we will be using Ethernet networks, which have a maximum frame size of 1500 bytes, this leaves 1472 bytes for your entire `packet` structure (including both the header and the chunk of data).
@@ -65,7 +65,7 @@ After completing this programming assignment, students should be able to:
 
 You will implement reliable transport using a sliding window mechanism. The size of the window (`window-size`) will be specified in the command line. `wSender` must accept cumulative `ACK` packets from `wReceiver`.
 
-After transferring the entire file, you should send an `END` message to mark the end of connection. Note, the `END` message cannot be sent until the full transfer is verified, meaning all `ACK`s from `DATA` packets must have already been received by the sender before sending the `END` message. In addition, because the `END` packet could be dropped, the `END` packet must also be ACKed by the receiver.
+After transferring the entire file, you should send an `END` message to mark the end of the connection. Note, the `END` message cannot be sent until the full transfer is verified, meaning all `ACK`s from `DATA` packets must have already been received by the sender before sending the `END` message. In addition, because the `END` packet could be dropped, the `END` packet must also be ACKed by the receiver.
 
 `wSender` must ensure reliable data transfer under the following network conditions:
 
@@ -74,7 +74,7 @@ After transferring the entire file, you should send an `END` message to mark the
 * Duplication of any packets
 * Delay in the arrivals of ACKs
 
-To handle cases where `ACK` packets are lost, you should implement a 500 milliseconds retransmission timer to automatically retransmit packets that were never acknowledged.
+To handle cases where `ACK` packets are lost, you should implement a 500-millisecond retransmission timer to automatically retransmit packets that were never acknowledged.
 Whenever the window moves forward (i.e., some ACK(s) are received and some new packets are sent out), you reset the timer. If after 500ms the window still has not advanced, you retransmit all packets in the window because they are all never acknowledged.
 
 ### Running `wSender`
@@ -164,7 +164,7 @@ The command line parameters passed to these new `wSenderOpt` and `wReceiverOpt` 
 <a name="tips"></a>
 ## Important Notes
 * It is up to you how you choose to read from and write to files, but you may find the `std::ifstream.read()` and `std::ofstream.write()` functions particularly helpful.
-* Please closely follow updates on Ed. All further clarifications will be posted on Ed via pinned Instructor Notes. We recommend you follow these notes to receive updates in time.
+* Please closely follow updates on Piazza. All further clarifications will be posted on Piazza via pinned Instructor Notes. We recommend you follow these notes to receive updates in time.
 * You MUST NOT use TCP sockets.
 * You can find an example of UDP socket programming in the Discussion folder.
 * Another good resource for UDP socket programming is [Beej's Guide to Network Programming Using Internet Sockets](https://beej.us/guide/bgnet/html/index.html).
